@@ -1,0 +1,23 @@
+.blogs {
+    display: flex;
+  
+    .blogsContainer {
+      display: flex;
+      flex-direction: column;
+      flex: 6;
+  
+      .blogPost {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+  
+      .commentSection {
+        margin-top: 2rem;
+      }
+
+     
+    }
+}
+  

@@ -1,0 +1,41 @@
+.commentSection {
+    margin: 1rem;
+    color: gray;
+    }
+    
+    .comments {
+    margin: 1rem;
+    color: #333;
+    }
+    
+    .comment {
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 1rem;
+    margin: 1rem 0;
+    
+    .user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      object-fit: cover;
+    }
+    
+    p {
+      font-weight: bold;
+    }
+    }
+    
+    .commentText {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: gray;
+    }
+}
