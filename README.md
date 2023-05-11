@@ -1,8 +1,6 @@
 # Neathbac
 
-## Available Scripts
-
-Diligent ap h basics
+`Diligent ap h basics`
 
 ## Available Scripts
 
