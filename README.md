@@ -1,4 +1,4 @@
-# Neatbac
+# Neathbac
 
 ## Available Scripts
 
