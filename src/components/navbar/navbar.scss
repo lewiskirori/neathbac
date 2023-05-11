@@ -21,6 +21,8 @@
             justify-content: center;
             margin-top: 14px;
             font-weight: 700;
+            font-size: larger;
+            margin-right: auto;
 
             .timeColor {
                 color: #8884d8;
@@ -32,6 +34,7 @@
             width: 35%;            
             max-width: 500px;
             margin-bottom: -12px;
+            margin-right: auto;
             display: flex;
             align-items: center;
             border: 1px solid transparent;
@@ -115,3 +118,50 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+      height: auto;
+      border-bottom: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      
+      .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 10px;
+        justify-content: center;
+  
+        .timeoftheDay {
+          order: 1;
+          margin-right: auto;
+          font-size: 18px;
+        }
+  
+        .search {
+          order: 3;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          width: 100%;
+          max-width: none;
+        }
+  
+        .items {
+          order: 2;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+  
+          .item {
+            margin: 0;
+          }
+        }
+      }
+    }
+}
+  

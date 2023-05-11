@@ -40,7 +40,7 @@
         .cellWithStatus {
             padding: 5px;
             border-radius: 5px;
-    
+
             &.Active {
                 background-color: rgba(0, 128, 0, 0.05);
                 color: green;
@@ -71,6 +71,30 @@
                 color: crimson;
                 border: 1px dotted rgba(220, 20, 60, 0.6);
                 cursor: pointer;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .products {
+        flex-direction: column;
+
+        .productsContainer {
+            flex: none;
+            width: 100%;
+
+            .productTitle {
+                font-size: 18px;
+            }
+
+            .cellWithImg {
+                margin-bottom: 10px;
+            }
+
+            .cellAction {
+                flex-direction: column;
+                gap: 0px;
             }
         }
     }

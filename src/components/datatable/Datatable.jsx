@@ -46,6 +46,7 @@ const Datatable = () => {
             }}
             pageSizeOptions={[10, 20, 25, 50, 100]}
             checkboxSelection
+            style={{ width: '100%' }}
         />    
       </div>
   )

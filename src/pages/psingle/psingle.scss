@@ -1,87 +1,106 @@
 .psingle {
     display: flex;
     width: 100%;
- 
+  
     .psingleContainer {
-     flex: 6;
- 
-     .top {
-         padding: 20px;
-         display: flex;
-         gap: 20px;
- 
-         .left {
-             flex: 1;
-             -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-             box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-             padding: 20px;
-             position: relative;
-             border-radius: 10px;
- 
-             .editButton {
-                 position: absolute;
-                 top: 0;
-                 right: 0;
-                 padding: 5px;
-                 font-size: 12px;
-                 font-weight: 500;
-                 color: #8884d8;
-                 background-color: #7551f818;
-                 border-radius: 0px 0px 0px 5px;
-                 cursor: pointer;
-             }
- 
-             .item {
-                 display: flex;
-                 gap: 20px;
- 
-                 .itemImg {
-                     width: 30%;
-                     height: 25%;
-                     border-radius: 50%;
-                     object-fit: cover;
-                 }
- 
-                 .details {
-                     .itemTitle {
-                         margin-bottom: 10px;
-                         color: #555;
-                     }
- 
-                     .detailItem {
-                         margin-bottom: 10px;
-                         font-size: 14px;
- 
-                         .itemKey {
-                             font-weight: bold;
-                             color: gray;
-                             margin-right: 5px;
-                         }
- 
-                         .itemValue {
-                             font-weight: 300;
-                         }
-                     }
-                 }
-             }
-         }
- 
-         .right {
-             flex: 2;
-         }
-     }
- 
-     .bottom {
-         padding: 20px;
-         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-         margin: 0px 20px 10px 20px;
-     }
-     
-        .title {
-         font-size: 16px;
-         color: lightgray;
-         margin-bottom: 20px;
-     }
+      flex: 6;
+  
+      .top {
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+  
+        .left {
+          flex: 1;
+          -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+          box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+          padding: 20px;
+          position: relative;
+          border-radius: 10px;
+  
+          .editButton {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #8884d8;
+            background-color: #7551f818;
+            border-radius: 0px 0px 0px 5px;
+            cursor: pointer;
+          }
+  
+          .item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+  
+            .itemImg {
+              width: 30%;
+              height: 25%;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+  
+            .details {
+              flex: 1;
+  
+              .itemTitle {
+                margin-bottom: 10px;
+                color: #555;
+              }
+  
+              .detailItem {
+                margin-bottom: 10px;
+                font-size: 14px;
+  
+                .itemKey {
+                  font-weight: bold;
+                  color: gray;
+                  margin-right: 5px;
+                }
+  
+                .itemValue {
+                  font-weight: 300;
+                }
+              }
+            }
+          }
+        }
+  
+        .right {
+          flex: 1;
+          margin-left: 20px;
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .psingle {
+          flex-direction: column;
+          align-items: center;
+        }
+        .left {
+          width: 100%;
+        }
+        .right {
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
+  
+      .bottom {
+        padding: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        margin: 0px 20px 10px 20px;
+      }
+  
+      .title {
+        font-size: 16px;
+        color: lightgray;
+        margin-bottom: 20px;
+      }
     }
- }
+  }
+  

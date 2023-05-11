@@ -1,5 +1,4 @@
 .datatable {
-    height: 600px;
     padding: 20px;
     margin-bottom: 30px;
 
@@ -77,4 +76,11 @@
             cursor: pointer;
         }
     }
+
+  @media (max-width: 768px) {
+    .datatable {
+      max-height: 500px;
+      overflow-y: auto;
+    }
+  }
 }

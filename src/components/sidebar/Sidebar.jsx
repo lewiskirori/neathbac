@@ -8,15 +8,29 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
-const Sidebar = () => {
+const Sidebar = ({ showSidebar, toggleSidebar }) => {
+
   return (
-    <div className='sidebar'>
+    <>
+    <div className={`sidebar ${showSidebar ? "open" : "closed"}`}>
         <Link to="/dashboard" style={{ textDecoration: "none" }}>
             <div className="top">
                 <span className="logo">NeatHBAdmin</span>
             </div>
         </Link>
+        {showSidebar && (
+            <CloseRoundedIcon
+                style={{ fontSize: "2rem", position: "absolute", 
+                top: 10, 
+                right: -40, 
+                border: "1px solid #fff",
+                color: "#f5f5f5", 
+                cursor: "pointer" }}
+                onClick={toggleSidebar}
+            />
+        )}
         <hr />
         <div className="center">
             <ul>
@@ -74,7 +88,13 @@ const Sidebar = () => {
                 </Link>
             </ul>
         </div>
+        <div className="powered-by">
+        <span className="powered-by-text">Powered by</span>
+        <span className="powered-by-logo">Traffs</span>
+        </div>
     </div>
+    {showSidebar && <div className="overlay" onClick={toggleSidebar} />}
+    </>
   )
 }
 

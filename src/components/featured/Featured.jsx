@@ -95,6 +95,13 @@ const Featured = () => {
                             <div className="resultAmount">Ksh{(32400).toLocaleString()}</div>
                     </div>
                 </div>
+                <div className="item">
+                    <div className="itemTitle">Last Year</div>
+                    <div className="itemResult positive">
+                            <ArrowDropUpIcon />
+                            <div className="resultAmount">Ksh{(879400).toLocaleString()}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

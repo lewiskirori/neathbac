@@ -51,7 +51,7 @@ export const Account = () => {
                 <Link to="/account/settings" style={{ textDecoration: "none" }} className='link'>
                 <div className="editButton">Update Account</div>
                 </Link>
-                <h1 className="title">My Account</h1>
+                <h1 className="title">Your Profile</h1>
                 <div className="item">
                 <img 
                 src="https://images.pexels.com/photos/10394207/pexels-photo-10394207.jpeg?cs=srgb&dl=pexels-mostafaft-shots-10394207.jpg&fm=jpg&_gl=1*xeb6ut*_ga*MzkxMzI1ODAwLjE2ODMyMjIxOTM.*_ga_8JE65Q40S6*MTY4MzIyMjE5OS4xLjEuMTY4MzIyNDMzOS4wLjAuMA.." 
@@ -96,7 +96,11 @@ export const Account = () => {
                   aria-labelledby="parent-modal-title"
                   aria-describedby="parent-modal-description"
                 >
-                  <Box sx={{ ...style, width: 400 }}>
+                  <Box sx={{ 
+                    ...style,
+                    width: "90%",
+                    maxWidth: 400, 
+                    }}>
                     <h2 id="parent-modal-title">You are about to delete this Profile</h2>
                     <p id="parent-modal-description">
                       Do you really want to delete your account?

@@ -1,26 +1,36 @@
 .sidebar {
+    position: fixed;
     flex: 1;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 240px;
     border-right: 0.5px solid rgb(230, 227, 227);
     min-height: 100vh;
     background-color: #fff;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+   
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+
+    &.open {
+        transform: translateX(0%);
+    }
+
+    &.closed {
+        transform: translateX(-100%);
+    }
 
     .top {
-        padding: 6px;
-        height: 50px;
+        padding: 20px;
+        margin: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: #f7f6ff;
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        border-radius: 10px;
         cursor: pointer;
-
-        &:hover {
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-        }
-
 
         .logo {
             font-size: 20px;
@@ -76,6 +86,46 @@
             }
         }
     }
+    .powered-by {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 100px;
+        font-size: 0.7rem;
+        font-family: 'Pacifico', cursive;
+      }
+      
+      .powered-by-text {
+        margin-right: 5px;
+      }
+      
+      .powered-by-logo {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #8884d8;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Pacifico', cursive;
+      }
+      
+      .powered-by-logo span {
+        color: #fff;
+        background-color: #8884d8;
+        padding: 0 5px;
+        border-radius: 5px;
+        margin-left: 5px;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Pacifico', cursive;
+      }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 

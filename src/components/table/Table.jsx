@@ -317,12 +317,12 @@ EnhancedTableHead.propTypes = {
         [order, orderBy, page, rowsPerPage],
       );
       return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', overflowX: 'auto'}}>
           <Paper sx={{ width: '100%', mb: 2 }}>
             <EnhancedTableToolbar numSelected={selected.length} />
             <TableContainer className='table'>
               <Table
-                sx={{ minWidth: 750 }}
+                sx={{ minWidth: 0 }}
                 aria-labelledby="tableTitle"
                 size={dense ? 'small' : 'medium'}
               >

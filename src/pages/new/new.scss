@@ -7,7 +7,7 @@
 
         .top, 
         .bottom {
-            padding: 10px;
+            padding: 20px;
             margin: 20px;
             display: flex;
             -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -90,6 +90,29 @@
                             border: 1px solid teal;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .newContainer {
+            .top, .bottom {
+                flex-direction: column;
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .right form {
+                flex-direction: column;
+                gap: 20px;
+
+                .formInput {
+                    width: 100%;
+                }
+
+                button {
+                    width: 100%;
                 }
             }
         }

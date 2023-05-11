@@ -9,6 +9,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import Sidebar from "../sidebar/Sidebar";
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
@@ -24,9 +26,13 @@ import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 
 const Navbar = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const { dispatch } = useContext(DarkModeContext)
 
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
     const time = new Date().getHours();
   let greeting;
 
@@ -91,13 +97,20 @@ const Navbar = () => {
     const path = `${window.location.pathname}?${queryParams}`;
     window.history.pushState({}, '', path);
   }, [searchQuery]);
+  
   return (
     <div className='navbar'>
-        <div className="wrapper">
+      {showSidebar && <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} toggleSidebar={toggleSidebar} />}
+      <div className="wrapper">
+            <MenuRoundedIcon style={{ 
+              fontSize: "2rem",
+              marginTop: -16,
+              marginBottom: -28,
+            }} 
+            onClick={toggleSidebar} />
             <div className="timeoftheDay">
                 {greeting}
             </div>
-            
             <div className="search">
             <input
             type="text"
