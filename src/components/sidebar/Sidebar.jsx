@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div className='sidebar'>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/dashboard" style={{ textDecoration: "none" }}>
             <div className="top">
                 <span className="logo">NeatHBAdmin</span>
             </div>

@@ -116,11 +116,9 @@ const Navbar = () => {
             </div>
             <div className="items">
                 <div className="item">
-                  <Tooltip title="Color Mode" className="icon">
-                    <IconButton>
-                        <DarkModeRoundedIcon 
-                        onClick={() => dispatch({type: "TOGGLE" })} 
-                        />
+                  <Tooltip title="Color Mode">
+                    <IconButton onClick={() => dispatch({type: "TOGGLE" })} >
+                        <DarkModeRoundedIcon className="navicon"/>
                     </IconButton>
                   </Tooltip>
                 </div>
@@ -128,7 +126,7 @@ const Navbar = () => {
                 {(popupState) => (
                 <div className="item">
                     <IconButton variant="contained" {...bindToggle(popupState)} className="icon">
-                      <NotificationsNoneRoundedIcon  />
+                      <NotificationsNoneRoundedIcon className="navicon" />
                       <div className="counter">1</div>
                       <Popper {...bindPopper(popupState)} transition>
                       {({ TransitionProps }) => (
