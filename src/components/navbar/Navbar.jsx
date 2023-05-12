@@ -27,11 +27,13 @@ import Paper from '@mui/material/Paper';
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const { dispatch } = useContext(DarkModeContext)
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
+    setIsActive(!isActive);
   };
     const time = new Date().getHours();
   let greeting;
@@ -75,6 +77,7 @@ const Navbar = () => {
       const handleClose = () => {
         setAnchorEl(null);
     }
+    
   // search query
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -102,12 +105,9 @@ const Navbar = () => {
     <div className='navbar'>
       {showSidebar && <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} toggleSidebar={toggleSidebar} />}
       <div className="wrapper">
-            <MenuRoundedIcon style={{ 
-              fontSize: "2rem",
-              marginTop: -16,
-              marginBottom: -28,
-            }} 
-            onClick={toggleSidebar} />
+            <MenuRoundedIcon       
+              className={`menu-icon ${isActive ? 'active' : ''}`}
+              onClick={toggleSidebar} />
             <div className="timeoftheDay">
                 {greeting}
             </div>

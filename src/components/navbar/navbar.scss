@@ -15,13 +15,33 @@
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 
+        .menu-icon {
+            font-size: 2rem;
+            margin-top: -16px;
+            margin-bottom: -28px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .menu-icon:hover {
+            font-weight: bold;
+            border: 1px solid #555;
+            border-radius: 5px;
+        }
+        
+        .menu-icon.active {
+            font-weight: bold;
+            border: 1px solid #555;
+            border-radius: 5px;
+        }          
+
         .timeoftheDay {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 14px;
             font-weight: 700;
-            font-size: larger;
+            font-size: 16px;
             margin-right: auto;
 
             .timeColor {
@@ -139,7 +159,7 @@
         .timeoftheDay {
           order: 1;
           margin-right: auto;
-          font-size: 18px;
+          font-size: 17px;
         }
   
         .search {
