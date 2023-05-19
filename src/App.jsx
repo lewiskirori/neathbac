@@ -1,29 +1,36 @@
 import Home from "./pages/home/Home";
 import Products from "./pages/products/Products";
-import Psingle from "./pages/psingle/Psingle"
-import Orders from "./pages/order/Orders"
-import Ordsingle from "./pages/ordsingle/Ordsingle"
+import Psingle from "./pages/psingle/Psingle";
+import Orders from "./pages/order/Orders";
+import Ordsingle from "./pages/ordsingle/Ordsingle";
 import Login from "./pages/auth/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Blogs from "./pages/blog/Blogs";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { productInputs, userInputs, orderInputs, settingsInputs, accountInputs } from "./formSource";
-import "./style/dark.scss"
+import {
+  productInputs,
+  userInputs,
+  orderInputs,
+  settingsInputs,
+  accountInputs,
+} from "./formSource";
+import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { Account } from "./pages/account/Account";
 import Settings from "./pages/account/Settings";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
+import { actions } from "./formAction";
 
 function App() {
-
-  const { darkMode } = useContext(DarkModeContext)
+  const { darkMode } = useContext(DarkModeContext);
+  const { register } = useContext(AuthContext);
 
   return (
-    <div className = { darkMode ? "app dark" : 'app' }>
-      <AuthProvider>
+    <div className={darkMode ? "app dark" : "app"}>
+      {/* <AuthProvider> */}
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -33,33 +40,54 @@ function App() {
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userID" element={<Single />} />
-              <Route path="new" element={<New inputs = {userInputs} title="Add a New User" />} 
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add a New User" />}
               />
             </Route>
             <Route path="products">
               <Route index element={<Products />} />
               <Route path=":productID" element={<Psingle />} />
-              <Route path="new" element={<New inputs = {productInputs} title="Add a New Product" />} 
+              <Route
+                path="new"
+                element={
+                  <New inputs={productInputs} title="Add a New Product" />
+                }
               />
             </Route>
             <Route path="orders">
               <Route index element={<Orders />} />
               <Route path=":orderID" element={<Ordsingle />} />
-              <Route path="new" element={<New inputs = {orderInputs} title="Add a New Order" />} 
+              <Route
+                path="new"
+                element={<New inputs={orderInputs} title="Add a New Order" />}
               />
             </Route>
             <Route path="blogs" element={<Blogs />} />
             <Route path="account">
               <Route index element={<Account />} />
-              <Route path="settings" element={<Settings inputs = {settingsInputs} title="Account Settings" />} />
-              <Route path="new" element={<New inputs = {accountInputs} title="Create a New Account" />} 
+              <Route
+                path="settings"
+                element={
+                  <Settings inputs={settingsInputs} title="Account Settings" />
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <New
+                    inputs={accountInputs}
+                    title="Create a New Account"
+                    action={register}
+                  />
+                }
               />
             </Route>
             <Route path="auth/SignOut/" element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </div>
   );
 }

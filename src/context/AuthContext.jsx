@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
 
       const querySnapshot = await getDocs(q);
 
-      console.log(querySnapshot);
+      // console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
 
@@ -121,37 +121,42 @@ export const AuthProvider = ({ children }) => {
     // }
   };
 
-  const register = async (
-    firstname,
-    lastname,
-    email,
-    phone,
-    password,
-    gender,
-    role
-  ) => {
+  // const register = async (
+  //   firstname,
+  //   lastname,
+  //   email,
+  //   phone,
+  //   password,
+  //   gender,
+  //   role
+  // ) => {
+  const register = async (array) => {
     // async(email,password)=>{
+    console.log(array);
+    // array;
     try {
       const result = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password
+        array[2],
+        // password,
+        array[4]
+        // array[]
       );
       // <AuthContext.Provider value={result}/>
 
       dbUser(
         result.user.uid,
         result.user.email,
-        firstname,
-        lastname,
-        role,
-        gender,
-        phone
+        array[0],
+        array[1],
+        array[5],
+        array[6],
+        array[3]
       );
       // console.log(result.user.uid);
       return true;
     } catch (error) {
-      // console.log(error.message);
+      console.log(error.message);
       return false;
     }
     // }

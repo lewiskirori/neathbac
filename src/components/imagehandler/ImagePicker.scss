@@ -1,0 +1,38 @@
+.imagepicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input[type="file"] {
+    display: none;
+  }
+
+  label {
+    display: inline-block;
+    border: 1.5px solid black;
+    border-radius: 12px;
+    background-color: white;
+    // background-color: red;
+    font-family: sans-serif;
+    padding: 10px;
+  }
+
+  .imagelist {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  #imageContainer {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
