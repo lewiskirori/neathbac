@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { Account } from "./pages/account/Account";
 import Settings from "./pages/account/Settings";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className = { darkMode ? "app dark" : 'app' }>
+      <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -57,6 +59,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

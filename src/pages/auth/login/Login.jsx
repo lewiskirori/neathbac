@@ -1,122 +1,104 @@
-import "./login.scss"
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Snackbar, Button } from "@mui/material";
-import { Alert } from "@mui/material";
-import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import React, { useContext, useState } from "react";
+import "./Login.scss";
+import { AuthContext } from "../../../context/AuthContext";
+import { useNavigate, Navigate } from "react-router-dom";
+import Password from "./Password/Password";
 
-const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
+const LogIn = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const { currentUser, signin } = useContext(AuthContext);
+  const [showPasswordReset, setShowPasswordReset] = useState(false);
+  const navigate = useNavigate();
 
-  const handleLogin = (event) => {
+  const handleEnter = (event) => {
+    if (event.key.toLowerCase() === "enter") {
+      const form = event.target.form;
+      const index = [...form].indexOf(event.target);
+      form.elements[index + 1].focus();
+      event.preventDefault();
+    }
+  };
+
+  // const showPasswordReset =(event) =>{
+
+  // }
+
+  const submit = (event) => {
     event.preventDefault();
-    if (username === "adminnhb" && password === "#admin?y=nhb#") {
-      setIsLoggedIn(true);
-      setUsername("");
-      setPassword("");
-      setOpenSnackbar(true);
+    const emailVal = email.trim;
+    const passVal = password.trim;
+    if (emailVal != "" && passVal != "") {
+      const result = signin(email, password);
+      // console.log(result);
+      result
+        .then((value) => {
+          if (value == true) {
+            alert(value);
+            navigate("/");
+          }
+          console.log(value); // 👉️ "bobbyhadz.com"
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
     }
   };
-
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
-
-  return (
-    <div className="login-page">
-      <div className="login-container">
-        <h1>Welcome back</h1>
-        <form method="" onSubmit={handleLogin}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-          <label htmlFor="password">Password</label>
-          <div style={{ position: "relative" }}>
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              id="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+  if (currentUser) {
+    return <Navigate replace to="/dashboard" />;
+  } else {
+    return (
+      <div className="signin">
+        <div className="main">
+          <div className="image">
+            <img
+              src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+              alt=""
             />
-            {showPassword ? (
-              <VisibilityOffRoundedIcon
-                onClick={handleTogglePassword}
-                style={{
-                  position: "absolute",
-                  top: 12,
-                  right: 10,
-                  cursor: "pointer",
-                  color: "lightgray",
-                }}
-              >
-                Hide
-              </VisibilityOffRoundedIcon>
-            ) : (
-              <VisibilityRoundedIcon
-                onClick={handleTogglePassword}
-                style={{
-                  position: "absolute",
-                  top: 12,
-                  right: 10,
-                  cursor: "pointer",
-                  color: "lightgray",
-                }}
-              >
-                Show
-              </VisibilityRoundedIcon>
-            )}
           </div>
-          <button type="submit">
-            <LockOutlinedIcon />
-            <span className="text">Login</span>
-          </button>
-        </form>
-        <p className="copy-text">
-          &copy; {new Date().getFullYear()} NeatHBAdmin. All rights reserved.
-        </p>
-      </div>
-      <Snackbar
-        open={openSnackbar}
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert
-        severity="success"
-        action={
-          <Button
-            component={Link}
-            to="/dashboard"
-            color="inherit"
-            size="small"
+          {/* <div className="form"> */}
+          {/* {`${process.env.REACT_APP_API_KEY}`} */}
+          <form
+            action="/"
+            className="form"
+            method="post"
+            onSubmit={() => false}
           >
-            Go to Admin Console
-          </Button>
-        }
-      >
-        You are logged in!
-      </Alert>
-      </Snackbar>
-    </div>
-  );
+            <img src="img/nhb_logo.png" alt="" />
+            <input
+              type="email"
+              placeholder="Enter email address"
+              required
+              onChange={(event) => setEmail(event.target.value)}
+              onKeyDown={handleEnter}
+            />
+            <input
+              type="password"
+              placeholder="Enter Password"
+              required
+              onChange={(event) => setPassword(event.target.value)}
+              onKeyDown={handleEnter}
+            />
+            <button
+              type="submit"
+              onClick={submit}
+              // onSubmit={(event) => event.preventDefault()}
+            >
+              Sign in
+            </button>
+            <span id="forgot" onClick={() => setShowPasswordReset(true)}>
+              forgot password?
+            </span>
+          </form>
+          {/* </div> */}
+        </div>
+        <Password
+          isShow={showPasswordReset}
+          cancel={() => setShowPasswordReset(false)}
+        />
+      </div>
+    );
+  }
 };
 
-export default Login;
+export default LogIn;
