@@ -9,8 +9,10 @@ import {
   setDoc,
   getDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { app } from "../firebase-config";
+// import { Exception } from "sass";
 
 const db = getFirestore(app);
 
@@ -35,7 +37,7 @@ export const ProductProvider = ({ children }) => {
               {
                 id: doc.id,
                 productname: docData.name,
-                img: docData.main_image,
+                img: docData.images,
                 price: docData.price,
                 count: docData.count,
                 category: docData.category,
@@ -50,12 +52,12 @@ export const ProductProvider = ({ children }) => {
             {
               id: doc.id,
               productname: docData.name,
-              img: docData.main_image,
+              img: docData.images,
               price: docData.price,
               count: docData.count,
               category: docData.category,
               status: docData.status,
-            //   ...doc.data(),
+              //   ...doc.data(),
             },
           ];
         }
@@ -66,7 +68,7 @@ export const ProductProvider = ({ children }) => {
 
   const createProduct = async (array) => {
     try {
-      const docRef = doc(db, "products", id);
+      const docRef = doc(db, "products", array[0]);
 
       const docSnap = await getDoc(docRef);
 
@@ -82,6 +84,31 @@ export const ProductProvider = ({ children }) => {
           active: array[5],
           images: array[6],
         });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const addProductImages = async (id, imagesArray) => {
+    try {
+      const docRef = doc(db, "products", id);
+
+      // let tempArray = [];
+
+      // tempArray = imagesArray;
+
+      const docSnap = await getDoc(docRef);
+      // let myTempobj = {
+      //   images: tempArray,
+      // };
+      // console.log(myTempobj);
+
+      if (docSnap.exists()) {
+        // imagesArray.map(async (item,index) =>
+        //   await updateDoc(docRef, {images:[item]})
+        //   )
+          await updateDoc(docRef, {images:imagesArray})
       }
     } catch (error) {
       console.log(error.message);
@@ -122,6 +149,7 @@ export const ProductProvider = ({ children }) => {
         getSingleProduct,
         createProduct,
         deleteProduct,
+        addProductImages,
       }}
     >
       {children}

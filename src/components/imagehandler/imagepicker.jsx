@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import Cropper from "react-easy-crop";
 import { useState } from "react";
 import { app, storage } from "../../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "./ImagePicker.scss";
 import CropEasy from "../crop/utils/cropeasy";
+import { ProductContext } from "../../context/ProductContext";
 
 const ImagePicker = ({
   isMulti = false,
   isSubmit = false,
+  label,
   toggleSubmit,
   getUrls,
+  id,
 }) => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState("");
   const [file, setFile] = useState(null);
+  const { addProductImages } = useContext(ProductContext);
   // const [urls, setUrls] = useState([]);
-  const [label, setLabel] = useState("");
+  // const [label, setLabel] = useState("");
 
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -74,18 +78,22 @@ const ImagePicker = ({
     }
     let imageUrls = [];
     images.map((image, index) => {
-      const imageRef = ref(storage, `images/${label + index}`);
+      const imageRef = ref(storage, `images/${label + "/" + index}`);
       // console.log(label+index);
-      uploadBytes(imageRef, image).then((snapshot) => {
-        // console.log(snapshot.get);
-        // console.log(getDownloadURL(imageRef));
-        getDownloadURL(imageRef).then((downloadURL) => {
-          imageUrls.push(downloadURL);
-          // console.log("File available at", downloadURL);
-        });
+      uploadBytes(imageRef, image)
+        .then((snapshot) => {
+          // console.log(snapshot.get);
+          // console.log(getDownloadURL(imageRef));
+          getDownloadURL(imageRef).then((downloadURL) => {
+            imageUrls.push(downloadURL);
+            // console.log("File available at", downloadURL);
+          });
 
-        // console.log("Uploaded a blob or file!");
-      });
+          // console.log("Uploaded a blob or file!");
+        })
+        .then(() => {
+          addProductImages(id, imageUrls);
+        });
     });
     return imageUrls;
     // const uploadTask =storage.ref(`images/${images.name}`).put
@@ -96,12 +104,13 @@ const ImagePicker = ({
 
   if (isSubmit == true) {
     toggleSubmit();
-    handleUpload().then((urls) => {
-      console.log(urls);
-      if (urls.length > 0) {
-        getUrls(urls);
-      }
-    });
+    handleUpload();
+    // .then((urls) => {
+    //   console.log(urls);
+    //   if (urls.length > 0) {
+    //     getUrls(urls);
+    //   }
+    // });
   }
 
   return openCrop ? (
@@ -189,7 +198,7 @@ const ImagePicker = ({
       /> */}
 
       {/* <button type="submit">boom</button> */}
-      <button onClick={handleUpload}>boom</button>
+      {/* <button onClick={handleUpload}>boom</button> */}
       {/* </form> */}
     </div>
   );
