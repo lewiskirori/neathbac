@@ -2,16 +2,22 @@ import React from "react";
 import Cropper from "react-easy-crop";
 import { useState } from "react";
 import { app, storage } from "../../firebase-config";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "./ImagePicker.scss";
 import CropEasy from "../crop/utils/cropeasy";
 
-const ImagePicker = ({ isMulti = false }) => {
+const ImagePicker = ({
+  isMulti = false,
+  isSubmit = false,
+  toggleSubmit,
+  getUrls,
+}) => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState("");
   const [file, setFile] = useState(null);
+  // const [urls, setUrls] = useState([]);
   const [label, setLabel] = useState("");
 
   const handleChange = (e) => {
@@ -50,6 +56,7 @@ const ImagePicker = ({ isMulti = false }) => {
         // ()=><Cropper image={objectUrl} />;
       }
     }
+
     // console.log(images);
     // console.log(selected);
     selected.map((image) => {
@@ -61,22 +68,41 @@ const ImagePicker = ({ isMulti = false }) => {
     });
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (images == null) {
       return;
     }
+    let imageUrls = [];
     images.map((image, index) => {
       const imageRef = ref(storage, `images/${label + index}`);
       // console.log(label+index);
       uploadBytes(imageRef, image).then((snapshot) => {
+        // console.log(snapshot.get);
+        // console.log(getDownloadURL(imageRef));
+        getDownloadURL(imageRef).then((downloadURL) => {
+          imageUrls.push(downloadURL);
+          // console.log("File available at", downloadURL);
+        });
+
         // console.log("Uploaded a blob or file!");
       });
     });
+    return imageUrls;
     // const uploadTask =storage.ref(`images/${images.name}`).put
   };
   const handleForm = (event) => {
     event.preventDefault();
   };
+
+  if (isSubmit == true) {
+    toggleSubmit();
+    handleUpload().then((urls) => {
+      console.log(urls);
+      if (urls.length > 0) {
+        getUrls(urls);
+      }
+    });
+  }
 
   return openCrop ? (
     <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
@@ -163,7 +189,7 @@ const ImagePicker = ({ isMulti = false }) => {
       /> */}
 
       {/* <button type="submit">boom</button> */}
-      {/* <button onClick={handleUpload}>boom</button> */}
+      <button onClick={handleUpload}>boom</button>
       {/* </form> */}
     </div>
   );

@@ -52,38 +52,59 @@ export const userInputs = [
 export const productInputs = [
     {
         id: 1,
+        label: "Product Id",
+        type: "text",
+        placeholder: "A2390",
+        entryType: "input"
+    },
+    {
+        id: 2,
         label: "Product Name",
         type: "text",
         placeholder: "Arrow mugs",
         entryType: "input"
     },
     {
-        id: 2,
+        id: 3,
         label: "Price",
         type: "text",
         placeholder: "Ksh1800",
         entryType: "input"
     },
     {
-        id: 3,
-        label: "Count",
+        id: 4,
+        label: "Description",
+        type: "",
+        placeholder: "Enter product description",
+        entryType: "textarea"
+    },
+    {
+        id: 5,
+        label: "Quantity",
         type: "number",
         placeholder: "5",
         entryType: "input"
     },
     {
-        id: 4,
+        id: 6,
         label: "Category",
         type: "text",
         placeholder: "Kitchen appliances",
         entryType: "input"
     },
     {
-        id: 4,
-        label: "Stock",
-        type: "text",
-        placeholder: "Active",
-        entryType: "input"
+        id: 7,
+        label: "active",
+        type: "select",
+        options: ["true","false"],
+        entryType: "select"
+    },
+    {
+        id: 8,
+        label: "active",
+        type: "select",
+        options: ["true","false"],
+        entryType: "select"
     },
 ]
 

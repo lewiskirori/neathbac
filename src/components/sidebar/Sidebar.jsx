@@ -79,7 +79,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                         <span>My Account</span>
                     </li>
                 </Link>
-                <Link to="/auth/SignOut/" style={{ textDecoration: "none" }}>
+                <Link to="/login" style={{ textDecoration: "none" }}>
                     <li>
                         <Tooltip title="Sign Out">
                         <LogoutIcon className="icon" /></Tooltip>
@@ -88,10 +88,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                 </Link>
             </ul>
         </div>
-        <div className="powered-by">
-        <span className="powered-by-text">Powered by</span>
-        <span className="powered-by-logo">Traffs</span>
-        </div>
+
     </div>
     {showSidebar && <div className="overlay" onClick={toggleSidebar} />}
     </>

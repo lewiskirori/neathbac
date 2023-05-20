@@ -56,8 +56,6 @@ const LogIn = () => {
               alt=""
             />
           </div>
-          {/* <div className="form"> */}
-          {/* {`${process.env.REACT_APP_API_KEY}`} */}
           <form
             action="/"
             className="form"

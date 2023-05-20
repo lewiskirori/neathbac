@@ -21,21 +21,21 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { Account } from "./pages/account/Account";
 import Settings from "./pages/account/Settings";
-import { AuthContext, AuthProvider } from "./context/AuthContext";
-import { actions } from "./formAction";
+import { AuthContext } from "./context/AuthContext";
+import { ProductContext } from "./context/ProductContext";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { register } = useContext(AuthContext);
+  const {createProduct} =useContext(ProductContext)
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      {/* <AuthProvider> */}
       <BrowserRouter>
         <Routes>
           <Route path="/">
             <Route index element={<Login />} />
-            <Route path="auth/login" element={<Login />} />
+            <Route path="login" element={<Login />} />
             <Route path="dashboard" element={<Home />} />
             <Route path="users">
               <Route index element={<List />} />
@@ -51,7 +51,7 @@ function App() {
               <Route
                 path="new"
                 element={
-                  <New inputs={productInputs} title="Add a New Product" />
+                  <New inputs={productInputs} title="Add a New Product" action={createProduct} />
                 }
               />
             </Route>
@@ -83,11 +83,10 @@ function App() {
                 }
               />
             </Route>
-            <Route path="auth/SignOut/" element={<Login />} />
+            <Route path="login" element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* </AuthProvider> */}
     </div>
   );
 }

@@ -148,7 +148,7 @@ export const userRows = [
 
 // Products
 export const productColumns = [
-    {field: "id", headerName: "ID", width: 70},
+    {field: "id", headerName: "ID", width: 170},
     {
         field: "product",
         headerName: "Name",
@@ -179,7 +179,7 @@ export const productColumns = [
     },
     {
         field: "status",
-        headerName: "Stock",
+        headerName: "Status",
         width: 100,
         renderCell: (params) => {
             return (

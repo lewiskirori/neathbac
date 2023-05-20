@@ -80,6 +80,10 @@
                 transition: border-bottom-width 0.5s ease-in-out;
               }
             }
+            textarea{
+                width: 100%;
+                resize: none;
+            }
           }
         }
 

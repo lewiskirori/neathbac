@@ -236,7 +236,7 @@ const Navbar = () => {
                         Settings
                       </MenuItem>
                       </Link>
-                      <Link to="/auth/SignOut/" style={{ textDecoration: "none", color: "#333" }}>
+                      <Link to="/login" style={{ textDecoration: "none", color: "#333" }}>
                       <MenuItem onClick={handleClose}>
                         <ListItemIcon>
                           <PowerSettingsNewRoundedIcon fontSize="small" />

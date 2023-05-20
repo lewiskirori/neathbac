@@ -5,102 +5,125 @@ import {
   collection,
   getDocs,
   query,
+  getFirestore,
+  setDoc,
+  getDoc,
+  deleteDoc,
 } from "firebase/firestore";
-import { db } from "../components/auth";
+import { app } from "../firebase-config";
+
+const db = getFirestore(app);
 
 export const ProductContext = React.createContext();
 export const useProducts = () => {
   return useContext(ProductContext);
 };
 
-const productsFromLocalStorage = JSON.parse(
-  localStorage.getItem("products") || "[]"
-);
-
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(productsFromLocalStorage);
+  const [products, setProducts] = useState([]);
 
-  const getData = async () => {
+  const fetchProducts = async () => {
     const querySnapshot = await getDocs(collection(db, "products"));
-    const dataList = querySnapshot.docs.map(
-      (doc) =>
-        setProducts((currentList) => {
-          // console.log(currentList);
-          if (currentList.length > 0) {
-            // console.log(currentList.find((item) => item.id === doc.id) );
-            if (!currentList.find((item) => item.id === doc.id)) {
-              const newlist = [...currentList, { id: doc.id, ...doc.data() }];
-              localStorage.setItem("products", JSON.stringify(newlist));
-              return [...currentList, { id: doc.id, ...doc.data() }];
-            }
-          } else {
-            const newlist = [...currentList, { id: doc.id, ...doc.data() }];
-            localStorage.setItem("products", JSON.stringify(newlist));
-            return [...currentList, { id: doc.id, ...doc.data() }];
+    const dataList = querySnapshot.docs.map((doc) =>
+      setProducts((currentList) => {
+        let docData = doc.data();
+
+        if (currentList.length > 0) {
+          if (!currentList.find((item) => item.id === doc.id)) {
+            return [
+              ...currentList,
+              {
+                id: doc.id,
+                productname: docData.name,
+                img: docData.main_image,
+                price: docData.price,
+                count: docData.count,
+                category: docData.category,
+                status: docData.status,
+                // ...doc.data(),
+              },
+            ];
           }
-          if (currentList === undefined) {
-            // console.log("duh");
-            localStorage.setItem("products", "");
-          } else {
-            localStorage.setItem("products", JSON.stringify(currentList));
-          }
-          return currentList;
-        })
-      // {
-      //   id: doc.id,
-      //   ...doc.data(),
-      // }
+        } else {
+          return [
+            ...currentList,
+            {
+              id: doc.id,
+              productname: docData.name,
+              img: docData.main_image,
+              price: docData.price,
+              count: docData.count,
+              category: docData.category,
+              status: docData.status,
+            //   ...doc.data(),
+            },
+          ];
+        }
+        return currentList;
+      })
     );
-    // console.log(dataList);
-    //     setProducts((currentProducts) => {
-
-    // const concatArr = currentProducts.concat(dataList)
-    // const result = concatArr.filter((item, idx) => concatArr.indexOf(item) === idx)
-
-    // currentProducts.find(item =>console.log(item.id))
-
-    // // console.log(result);
-    //       // console.log([...new Set([...currentProducts,...dataList])]);
-    //       return[...new Set([...currentProducts, ...dataList])];
-    //       // if (currentProducts.find(item =>item.id === doc.id) === null) {
-    //       //   return [...currentProducts,{id:doc.id,...doc.data}]
-    //       // }
-    //     });
-    // console.log(products);
   };
 
-  const createProduct =async (id)=>{
+  const createProduct = async (array) => {
     try {
-        const q = query(collection(db, "products"), where("id", "==", id));
-        const querySnapshot = await getDocs(q);
+      const docRef = doc(db, "products", id);
 
-      // console.log(querySnapshot);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
+      const docSnap = await getDoc(docRef);
 
-        console.log(doc.data());
-        // setUser((prevdata) => {
-        //   return { ...prevdata, ...doc.data() };
-        // });
-      });
-        
+      if (docSnap.exists()) {
+        return;
+      } else {
+        await setDoc(docRef, {
+          id: array[0],
+          name: array[1],
+          price: array[2],
+          description: array[3],
+          quantity: array[4],
+          active: array[5],
+          images: array[6],
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  }catch(error){
-            
-  }
-}
+  const getSingleProduct = (id) => {
+    let returnProduct;
+    products.map((product, index) => {
+      if (product.id == id) {
+        returnProduct = product;
+      }
+    });
+    return returnProduct;
+  };
 
-  // getData();
+  const deleteProduct = async (id) => {
+    try {
+      const docRef = doc(db, "products", id);
+
+      const docSnap = await deleteDoc(docRef);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     if (products.length <= 0) {
-      getData();
+      fetchProducts();
     }
-    // localStorage.setItem('products',JSON.stringify(products))
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        fetchProducts,
+        getSingleProduct,
+        createProduct,
+        deleteProduct,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );

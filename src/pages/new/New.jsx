@@ -6,20 +6,23 @@ import { useState } from "react";
 import { actions } from "../../formAction";
 import ImagePicker from "../../components/imagehandler/imagepicker";
 
-const New = ({ inputs, title, action, imageType ="none" }) => {
+const New = ({ inputs, title, action, imageType = "none" }) => {
   const [file, setFile] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [getUrls, setGetUrls] = useState([]);
 
   // console.log(inputs);
 
   const submit = (event) => {
     event.preventDefault();
     // console.log(event.target.length);
+    setIsSubmit(true);
     let myArray = [];
     for (let index = 0; index < event.target.length - 1; index++) {
       myArray.push(event.target[index].value);
     }
     action(myArray);
-    // console.log(myArray);
+    console.log(myArray);
     // console.log(event.target[0].value);
   };
 
@@ -33,22 +36,27 @@ const New = ({ inputs, title, action, imageType ="none" }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            {imageType== "user"?
-            <Tooltip title="Your image">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHWq8PbZOi3fK-eM5DmNzsLkmyEy9Ldf8ykOmJ-vERlPX1_I&s"
-              }
-              alt=""
-              onClick={() => document.getElementById("file").click()}
-              style={{ cursor: "pointer" }}
-            />
-          </Tooltip>:
-            <ImagePicker />
-          }
-            
+            {imageType == "user" ? (
+              <Tooltip title="Your image">
+                <img
+                  src={
+                    file
+                      ? URL.createObjectURL(file)
+                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHWq8PbZOi3fK-eM5DmNzsLkmyEy9Ldf8ykOmJ-vERlPX1_I&s"
+                  }
+                  alt=""
+                  onClick={() => document.getElementById("file").click()}
+                  style={{ cursor: "pointer" }}
+                />
+              </Tooltip>
+            ) : (
+              <ImagePicker
+                isSubmit={isSubmit}
+                toggleSubmit={() => setIsSubmit(false)}
+                getUrls={setGetUrls}
+              />
+            )}
+
             {/* <input
               type="file"
               id="file"
@@ -63,13 +71,13 @@ const New = ({ inputs, title, action, imageType ="none" }) => {
                 {inputs.map((input) =>
                   input.entryType == "input" ? (
                     <div className="formInput" key={input.id}>
-                      <label>{input.label}</label>
+                      <label>{input.label + getUrls.length}</label>
                       <input
                         type={input.type}
                         placeholder={input.placeholder}
                       />
                     </div>
-                  ) : (
+                  ) : input.entryType == "select" ? (
                     <div className="formInput" key={input.id}>
                       <label>{input.label}</label>
                       <select>
@@ -80,6 +88,11 @@ const New = ({ inputs, title, action, imageType ="none" }) => {
                           </option>
                         ))}
                       </select>
+                    </div>
+                  ) : (
+                    <div className="formInput" key={input.id}>
+                      <label>{input.label}</label>
+                      <textarea name="" id="" cols="30" rows="10"></textarea>
                     </div>
                   )
                 )}
