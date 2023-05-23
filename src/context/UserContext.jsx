@@ -14,18 +14,18 @@ import { app } from "../firebase-config";
 
 const db = getFirestore(app);
 
-export const ProductContext = React.createContext();
-export const useProducts = () => {
-  return useContext(ProductContext);
+export const UserContext = React.createContext();
+export const useUsers = () => {
+  return useContext(UserContext);
 };
 
-export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+export const UserProvider = ({ children }) => {
+  const [users, setUsers] = useState([]);
 
-  const fetchProducts = async () => {
-    const querySnapshot = await getDocs(collection(db, "products"));
+  const fetchUsers = async () => {
+    const querySnapshot = await getDocs(collection(db, "users"));
     const dataList = querySnapshot.docs.map((doc) =>
-      setProducts((currentList) => {
+      setUsers((currentList) => {
         let docData = doc.data();
 
         if (currentList.length > 0) {
@@ -34,11 +34,9 @@ export const ProductProvider = ({ children }) => {
               ...currentList,
               {
                 id: doc.id,
-                productname: docData.name,
-                img: docData.main_image,
-                price: docData.price,
-                count: docData.quantity,
-                category: docData.category,
+                username: docData.firstname + " " + docData.lastname,
+                email: docData.email,
+                dob: docData.dob,
                 status: docData.status,
                 // ...doc.data(),
               },
@@ -48,25 +46,24 @@ export const ProductProvider = ({ children }) => {
           return [
             ...currentList,
             {
-              id: doc.id,
-              productname: docData.name,
-              img: docData.main_image,
-              price: docData.price,
-              count: docData.quantity,
-              category: docData.category,
-              status: docData.status,
+                id: doc.id,
+                username: docData.firstname + " " + docData.lastname,
+                age: docData.dob,
+                email: docData.email,
+                status: docData.status,
             //   ...doc.data(),
             },
           ];
         }
+        console.log(currentList);
         return currentList;
       })
     );
   };
 
-  const createProduct = async (array) => {
+  const createUser = async (array) => {
     try {
-      const docRef = doc(db, "products", array[0]);
+      const docRef = doc(db, "users", id);
 
       const docSnap = await getDoc(docRef);
 
@@ -88,19 +85,19 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const getSingleProduct = (id) => {
-    let returnProduct;
-    products.map((product, index) => {
-      if (product.id == id) {
-        returnProduct = product;
+  const getSingleUser = (id) => {
+    let returnUser;
+    users.map((user, index) => {
+      if (user.id == id) {
+        returnUser = user;
       }
     });
-    return returnProduct;
+    return returnUser;
   };
 
-  const deleteProduct = async (id) => {
+  const deleteUser = async (id) => {
     try {
-      const docRef = doc(db, "products", id);
+      const docRef = doc(db, "users", id);
 
       const docSnap = await deleteDoc(docRef);
     } catch (error) {
@@ -109,22 +106,22 @@ export const ProductProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (products.length <= 0) {
-      fetchProducts();
+    if (users.length <= 0) {
+      fetchUsers();
     }
   }, []);
 
   return (
-    <ProductContext.Provider
+    <UserContext.Provider
       value={{
-        products,
-        fetchProducts,
-        getSingleProduct,
-        createProduct,
-        deleteProduct,
+        users,
+        fetchUsers,
+        getSingleUser,
+        createUser,
+        deleteUser,
       }}
     >
       {children}
-    </ProductContext.Provider>
+    </UserContext.Provider>
   );
 };

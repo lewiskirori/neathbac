@@ -3,11 +3,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import { userColumns, userRows } from '../../datatablesource';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useUsers } from '../../context/UserContext';
 
 const Datatable = () => {
     const [data, setData] = useState(userRows)
+
+    const {users ,deleteUser} = useUsers()
     const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id))
+        deleteUser(id)
     }
 
     const actionColumn = [
@@ -37,7 +40,7 @@ const Datatable = () => {
         </div>
         <DataGrid
             className='datagrid'
-            rows={data}
+            rows={users}
             columns={userColumns.concat(actionColumn)}
             initialState={{
             pagination: {

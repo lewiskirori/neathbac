@@ -62,7 +62,7 @@ const LogIn = () => {
             method="post"
             onSubmit={() => false}
           >
-            <img src="img/nhb_logo.png" alt="" />
+            <img src="img/nhb_logo.png" alt="nhb_logo" />
             <input
               type="email"
               placeholder="Enter email address"

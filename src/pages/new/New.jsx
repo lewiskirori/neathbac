@@ -22,7 +22,7 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
       myArray.push(event.target[index].value);
     }
     action(myArray);
-    console.log(myArray);
+    // console.log(myArray);
     // console.log(event.target[0].value);
   };
 
