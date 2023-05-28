@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const style = {
   position: 'absolute',
@@ -33,6 +35,9 @@ function ChildModal() {
 }
 
 export const Account = () => {
+  const {userDetails} =useContext(AuthContext);
+
+  console.log(userDetails);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -62,7 +67,7 @@ export const Account = () => {
                     <h1 className="itemTitle">Neathbadmin</h1>
                     <div className="detailItem">
                     <span className="itemKey">Email:</span>
-                    <span className="itemValue">nbhadmin101@domain.com</span>
+                    <span className="itemValue">{userDetails.email}</span>
                     </div>
                     <div className="detailItem">
                     <span className="itemKey">First Name:</span>

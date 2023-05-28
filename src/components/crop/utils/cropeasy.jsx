@@ -3,7 +3,7 @@ import Cropper from "react-easy-crop";
 import getCroppedImg from "./cropimage";
 import "./cropeasy.scss";
 
-const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
+const CropEasy = ({ tempPhotoURL, setOpenCrop, setPhotoURL, setFile, filesCompiler }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
@@ -16,15 +16,19 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
   const cropImage = async () => {
     try {
       const { file, url } = await getCroppedImg(
-        photoURL,
+        tempPhotoURL,
         croppedAreaPixels,
         rotation
-      );
+        );
       setPhotoURL(url);
       setFile(file);
       setOpenCrop(false);
+      // setTimeout(() => {
+        
+        filesCompiler()
+      // }, 6000);
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
   return (
@@ -41,7 +45,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
           }}
         >
           <Cropper
-            image={photoURL}
+            image={tempPhotoURL}
             crop={crop}
             zoom={zoom}
             rotation={rotation}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Cropper from "react-easy-crop";
 import { useState } from "react";
 import { app, storage } from "../../firebase-config";
@@ -16,21 +16,37 @@ const ImagePicker = ({
   const [selectedImages, setSelectedImages] = useState([]);
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState("");
+  const [tempPhotoURL, setTempPhotoURL] = useState("");
+  const [tempFile, setTempFile] = useState(null);
   const [file, setFile] = useState(null);
   // const [urls, setUrls] = useState([]);
   const [label, setLabel] = useState("");
 
-  const handleChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFile(file);
-      setPhotoURL(URL.createObjectURL(file));
+  const filesCompiler =()=>{
+    // console.log(file);
+    setPhotoURL(URL.createObjectURL(file));
       setSelectedImages((prevState) => [
         ...prevState,
         URL.createObjectURL(file),
       ]);
       setImages((prevState) => [...prevState, file]);
+  }
+
+  useEffect(()=>{
+    // console.log("change in file");
+  },[file])
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setTempFile(file);
+      setTempPhotoURL(URL.createObjectURL(file));
       setOpenCrop(true);
+      // setSelectedImages((prevState) => [
+      //   ...prevState,
+      //   URL.createObjectURL(file),
+      // ]);
+      // setImages((prevState) => [...prevState, file]);
     }
   };
   const handleChanges = (e) => {
@@ -105,7 +121,7 @@ const ImagePicker = ({
   }
 
   return openCrop ? (
-    <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
+    <CropEasy {...{ tempPhotoURL, setOpenCrop, setPhotoURL, setFile,filesCompiler }} />
   ) : (
     <div>
       {/* <h1>{label}</h1> */}

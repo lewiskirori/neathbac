@@ -24,15 +24,36 @@ import {
 const db = getFirestore(app);
 export const AuthContext = React.createContext();
 
-const dummyData = { uid: "" };
+const dummyData = { uid: "", firstname: "", lastname: "", phone: "" };
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(dummyData);
+  const [userDetails, setUserDetails] = useState(dummyData);
   // const { clearOnLogout } = useUser();
   // const navigate = useNavigate();
+  const getUserDetails = async (uid) => {
+    try {
+      const docRef = doc(db, "staff", uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setUserDetails((prevdata) => docSnap.data());
+        console.log("Document data:", docSnap.data());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     auth.onAuthStateChanged(setCurrentUser);
+  }, []);
+
+  useEffect(() => {
+    if (currentUser.uid != "") {
+      getUserDetails(currentUser.uid);
+      console.log(userDetails);
+    }
   }, []);
 
   const dbUser = async (
@@ -189,7 +210,14 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, register, signin, logout, triggerResetEmail }}
+      value={{
+        currentUser,
+        userDetails,
+        register,
+        signin,
+        logout,
+        triggerResetEmail,
+      }}
     >
       {children}
     </AuthContext.Provider>
