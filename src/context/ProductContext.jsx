@@ -10,6 +10,7 @@ import {
   getDoc,
   deleteDoc,
   updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { app } from "../firebase-config";
 // import { Exception } from "sass";
@@ -39,7 +40,7 @@ export const ProductProvider = ({ children }) => {
                 productname: docData.name,
                 img: docData.images,
                 price: docData.price,
-                count: docData.count,
+                count: docData.quantity,
                 category: docData.category,
                 status: docData.status,
                 // ...doc.data(),
@@ -54,7 +55,7 @@ export const ProductProvider = ({ children }) => {
               productname: docData.name,
               img: docData.images,
               price: docData.price,
-              count: docData.count,
+              count: docData.quantity,
               category: docData.category,
               status: docData.status,
               //   ...doc.data(),
@@ -81,8 +82,8 @@ export const ProductProvider = ({ children }) => {
           price: array[2],
           description: array[3],
           quantity: array[4],
-          active: array[5],
-          images: array[6],
+          category: array[5],
+          active: array[6],
         });
       }
     } catch (error) {
@@ -102,13 +103,16 @@ export const ProductProvider = ({ children }) => {
       // let myTempobj = {
       //   images: tempArray,
       // };
-      // console.log(myTempobj);
+      console.log(imagesArray);
 
       if (docSnap.exists()) {
         // imagesArray.map(async (item,index) =>
         //   await updateDoc(docRef, {images:[item]})
+        // arrayUnion
+        await updateDoc(docRef, { images: arrayUnion(imagesArray) });
+
         //   )
-          await updateDoc(docRef, {images:imagesArray})
+        // await updateDoc(docRef, { images: imagesArray });
       }
     } catch (error) {
       console.log(error.message);

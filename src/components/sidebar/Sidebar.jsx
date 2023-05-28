@@ -17,7 +17,9 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
     <div className={`sidebar ${showSidebar ? "open" : "closed"}`}>
         <Link to="/dashboard" style={{ textDecoration: "none" }}>
             <div className="top">
-                <span className="logo">NeatHBAdmin</span>
+                <span className="logo">
+                    <img src="./img/nhb_logo.png" alt="nhb_logo" />
+                    </span>
             </div>
         </Link>
         {showSidebar && (

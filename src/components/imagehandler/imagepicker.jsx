@@ -86,13 +86,14 @@ const ImagePicker = ({
           // console.log(getDownloadURL(imageRef));
           getDownloadURL(imageRef).then((downloadURL) => {
             imageUrls.push(downloadURL);
+            addProductImages(id, downloadURL);
             // console.log("File available at", downloadURL);
           });
 
           // console.log("Uploaded a blob or file!");
         })
         .then(() => {
-          addProductImages(id, imageUrls);
+          // addProductImages(id, imageUrls);
         });
     });
     return imageUrls;
