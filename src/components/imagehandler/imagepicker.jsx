@@ -1,4 +1,4 @@
-import React, { useContext }, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import { useState } from "react";
 import { app, storage } from "../../firebase-config";
