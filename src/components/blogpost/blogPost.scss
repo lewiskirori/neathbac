@@ -1,57 +1,88 @@
 .blogPost {
-    border: none;
-    border-radius: 10px;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    padding: 2rem;
-    margin: 1rem;
-    
-    h2 {
+  border: none;
+  border-radius: 10px;
+  max-width: 465px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  padding: 2rem;
+  margin: 1rem;
+  .blogPost-header {
+    max-height: 150px;
+    // height: ;
+  }
+
+  .blogimage {
+    max-width: 465px;
+    max-height: 310px;
+    overflow: hidden;
+    mg {
+      display: block;
+      // max-width: 465px;
+      width: 100%;
+      min-height: 310px;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  h2 {
+    height: 86px;
     font-size: 2rem;
     margin-bottom: 1rem;
+    max-height: 86px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: gray;
-    }
-    
-    p {
+  }
+
+  p {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 1rem;
     color: gray;
-    }
+  }
 
-    .blogPost-by {
+  .blogPost-by {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-    }
-    
-    .blogPost-by__avatar {
+  }
+
+  .blogPost-by__avatar {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
     margin-right: 0.5rem;
     object-fit: cover;
-    }
-    
-    .blogPost-by__name {
+  }
+
+  .blogPost-by__name {
     font-size: 1rem;
     font-weight: 600;
     color: gray;
     margin-right: 0.5rem;
-    }
-    
-    .blogPost-by__timestamp {
+  }
+
+  .blogPost-by__timestamp {
     font-size: 0.9rem;
     color: gray;
-    }
-    
-    img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-        margin: 0 auto;
-        border-radius: 5px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    }
+  }
+
+  img {
+    display: block;
+    max-width: 465px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .content {
+    width: 465px;
+    // width: 100%;
+  }
 }

@@ -1,23 +1,47 @@
 .blogs {
-    display: flex;
-  
-    .blogsContainer {
-      display: flex;
-      flex-direction: column;
-      flex: 6;
-  
-      .blogPosts {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-  
-      .commentSection {
-        margin-top: 2rem;
-      }
+  display: flex;
 
-     
+  .datatable {
+    padding: 20px;
+    margin-bottom: 0;
+
+    .datatableTitle {
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+
+      .link {
+        text-decoration: none;
+        color: green;
+        font-weight: 400;
+        font-size: 15px;
+        border: 1px solid green;
+        padding: 2px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
     }
+  }
+
+  .blogsContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 6;
+
+    .blogPosts {
+      // margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      // flex-direction: column;
+      gap: 2rem;
+    }
+
+    .commentSection {
+      margin-top: 2rem;
+    }
+  }
 }
-  

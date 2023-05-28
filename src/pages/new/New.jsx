@@ -9,9 +9,17 @@ import ImagePicker from "../../components/imagehandler/imagepicker";
 const New = ({ inputs, title, action, imageType = "none" }) => {
   const [file, setFile] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
+  const [label, setLabel] = useState("");
+  const [productId, setProductId] = useState("");
   const [getUrls, setGetUrls] = useState([]);
 
   // console.log(inputs);
+
+  const updateUrls = (array) => {
+    if (array.length > 0) {
+      setGetUrls(array);
+    }
+  };
 
   const submit = (event) => {
     event.preventDefault();
@@ -22,7 +30,7 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
       myArray.push(event.target[index].value);
     }
     action(myArray);
-    // console.log(myArray);
+    console.log(myArray);
     // console.log(event.target[0].value);
   };
 
@@ -53,7 +61,9 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
               <ImagePicker
                 isSubmit={isSubmit}
                 toggleSubmit={() => setIsSubmit(false)}
-                getUrls={setGetUrls}
+                label={label}
+                id={productId}
+                getUrls={updateUrls}
               />
             )}
 
@@ -71,11 +81,31 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
                 {inputs.map((input) =>
                   input.entryType == "input" ? (
                     <div className="formInput" key={input.id}>
-                      <label>{input.label + getUrls.length}</label>
-                      <input
+                      <label>{input.label}</label>
+                      {input.label == "Product Name" ? (
+                        <input
+                          type={input.type}
+                          placeholder={input.placeholder}
+                          value={label}
+                          onChange={(e) => setLabel(e.target.value)}
+                        />
+                      ) : input.label == "Product Id" ? (
+                        <input
+                          type={input.type}
+                          placeholder={input.placeholder}
+                          value={productId}
+                          onChange={(e) => setProductId(e.target.value)}
+                        />
+                      ) : (
+                        <input
+                          type={input.type}
+                          placeholder={input.placeholder}
+                        />
+                      )}
+                      {/* <input
                         type={input.type}
                         placeholder={input.placeholder}
-                      />
+                      /> */}
                     </div>
                   ) : input.entryType == "select" ? (
                     <div className="formInput" key={input.id}>
