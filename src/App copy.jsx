@@ -8,13 +8,7 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Blogs from "./pages/blog/Blogs";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   productInputs,
   userInputs,
@@ -30,55 +24,37 @@ import Settings from "./pages/account/Settings";
 import { AuthContext } from "./context/AuthContext";
 import { ProductContext } from "./context/ProductContext";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "dashboard",
-    element: <Home />,
-  },
-  {
-    path: "users",
-    element: <List />,
-  },
-  {
-    path: "users/:userID",
-    element: <Single />,
-  },
-  {
-    path: "users/new",
-    element: <New inputs={userInputs} title="Add a New User" />,
-  },
-  {
-    path: "products",
-    element: <Products />,
-  },
-  {
-    path: "products/:productID",
-    element: <Psingle />,
-  },
-  {
-    path: "products/new",
-    element: (
-      <New inputs={productInputs} title="Add a New Product" action={createProduct}
-      />
-    ),
-  },
-]);
-
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { register } = useContext(AuthContext);
-  const { createProduct } = useContext(ProductContext);
+  const {createProduct} =useContext(ProductContext)
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <RouterProvider router={router} />
-      {/* <BrowserRouter>
-        
-            
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Login />} />
+            <Route path="login" element={<Login />} />
+            <Route path="dashboard" element={<Home />} />
+            <Route path="users">
+              <Route index element={<List />} />
+              <Route path=":userID" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add a New User" />}
+              />
+            </Route>
+            <Route path="products">
+              <Route index element={<Products />} />
+              <Route path=":productID" element={<Psingle />} />
+              <Route
+                path="new"
+                element={
+                  <New inputs={productInputs} title="Add a New Product" action={createProduct} />
+                }
+              />
+            </Route>
             <Route path="orders">
               <Route index element={<Orders />} />
               <Route path=":orderID" element={<Ordsingle />} />
@@ -110,7 +86,7 @@ function App() {
             <Route path="login" element={<Login />} />
           </Route>
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </div>
   );
 }
