@@ -18,10 +18,11 @@
         input {
             margin-bottom: 20px;
             outline: none;
-            border: 1px solid none;
+   
             background-color: transparent;
     
             &:focus-within {
+                border-bottom: 1px solid #8884d8;
                 border-color: #8884d8;
             }
         }
