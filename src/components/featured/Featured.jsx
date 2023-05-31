@@ -21,7 +21,8 @@ const ITEM_HEIGHT = 48;
 
 const Featured = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedOption, setSelectedOption] = useState(options[0]); // Initially set to 'Target'
+  const [selectedOption, setSelectedOption] = useState(options[0]); // Initially set to 'Target' 
+  const [selectedOption2, setSelectedOption2] = useState(options[3]); // Initially set to 'Last Year'
 
   const open = Boolean(anchorEl);
 
@@ -124,8 +125,8 @@ const Featured = () => {
           </div>
           <div className="item">
             <div className="itemTitle">Last Year</div>
-            <div className={`itemResult ${selectedOption === 'Last Year' ? 'positive' : 'negative'}`}>
-              {selectedOption === 'Last Year' ? (
+            <div className={`itemResult ${selectedOption2 === 'Last Year' ? 'positive' : 'negative'}`}>
+              {selectedOption2 === 'Last Year' ? (
                 <ArrowDropUpIcon />
               ) : (
                 <ArrowDropDownIcon />
@@ -140,5 +141,6 @@ const Featured = () => {
 };
 
 export default Featured;
+
 
 
