@@ -47,6 +47,7 @@ const Featured = () => {
                 MenuListProps={{
                 'aria-labelledby': 'long-button',
                 }}
+                
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
