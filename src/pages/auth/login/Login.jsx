@@ -47,6 +47,7 @@ const Login = () => {
             id="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
+            autoFocus 
           />
           <label htmlFor="password">Password</label>
           <div style={{ position: "relative" }}>
