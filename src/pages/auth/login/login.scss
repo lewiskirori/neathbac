@@ -7,7 +7,6 @@
 
     .login-container {
         width: 400px;
-
         background-color: #fff;
         border-radius: 30px;
         border: 1px solid none;
@@ -18,7 +17,6 @@
         input {
             margin-bottom: 20px;
             outline: none;
-   
             background-color: transparent;
     
             &:focus-within {
@@ -83,6 +81,3 @@
         color: gray;
       }
   }
-  
-  
-  
