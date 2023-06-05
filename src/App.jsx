@@ -30,48 +30,53 @@ import Settings from "./pages/account/Settings";
 import { AuthContext } from "./context/AuthContext";
 import { ProductContext } from "./context/ProductContext";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "dashboard",
-    element: <Home />,
-  },
-  {
-    path: "users",
-    element: <List />,
-  },
-  {
-    path: "users/:userID",
-    element: <Single />,
-  },
-  {
-    path: "users/new",
-    element: <New inputs={userInputs} title="Add a New User" />,
-  },
-  {
-    path: "products",
-    element: <Products />,
-  },
-  {
-    path: "products/:productID",
-    element: <Psingle />,
-  },
-  {
-    path: "products/new",
-    element: (
-      <New inputs={productInputs} title="Add a New Product" action={createProduct}
-      />
-    ),
-  },
-]);
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { register } = useContext(AuthContext);
   const { createProduct } = useContext(ProductContext);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/Login",
+      element: <Login />,
+    },
+    {
+      path: "dashboard",
+      element: <Home />,
+    },
+    {
+      path: "users",
+      element: <List />,
+    },
+    {
+      path: "users/:userID",
+      element: <Single />,
+    },
+    {
+      path: "users/new",
+      element: <New inputs={userInputs} title="Add a New User" />,
+    },
+    {
+      path: "products",
+      element: <Products />,
+    },
+    {
+      path: "products/:productID",
+      element: <Psingle />,
+    },
+    {
+      path: "products/new",
+      element: (
+        <New inputs={productInputs} title="Add a New Product" action={createProduct}
+        />
+      ),
+    },
+  ]);
+
 
   return (
     <div className={darkMode ? "app dark" : "app"}>

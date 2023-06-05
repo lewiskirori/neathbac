@@ -5,6 +5,8 @@ import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
 import { actions } from "../../formAction";
 import ImagePicker from "../../components/imagehandler/imagepicker";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const New = ({ inputs, title, action, imageType = "none" }) => {
   const [file, setFile] = useState("");
@@ -12,6 +14,8 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
   const [label, setLabel] = useState("");
   const [productId, setProductId] = useState("");
   const [getUrls, setGetUrls] = useState([]);
+
+  const [description,setDescription] = useState("")
 
   // console.log(inputs);
 
@@ -122,7 +126,8 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
                   ) : (
                     <div className="formInput" key={input.id}>
                       <label>{input.label}</label>
-                      <textarea name="" id="" cols="30" rows="10"></textarea>
+                      <ReactQuill theme="snow" value={description} onChange={setDescription} />
+                      <textarea hidden name="" id="" cols="30" rows="10" value={ description}></textarea>
                     </div>
                   )
                 )}
