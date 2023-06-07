@@ -30,7 +30,6 @@ import Settings from "./pages/account/Settings";
 import { AuthContext } from "./context/AuthContext";
 import { ProductContext } from "./context/ProductContext";
 
-
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { register } = useContext(AuthContext);
@@ -61,6 +60,20 @@ function App() {
       element: <New inputs={userInputs} title="Add a New User" />,
     },
     {
+      path: "/account",
+      element: <Account />,
+    },
+    {
+      path: "/account/new",
+      element: (
+        <New
+          inputs={accountInputs}
+          title="Create a New Account"
+          action={register}
+        />
+      ),
+    },
+    {
       path: "products",
       element: <Products />,
     },
@@ -71,12 +84,14 @@ function App() {
     {
       path: "products/new",
       element: (
-        <New inputs={productInputs} title="Add a New Product" action={createProduct}
+        <New
+          inputs={productInputs}
+          title="Add a New Product"
+          action={createProduct}
         />
       ),
     },
   ]);
-
 
   return (
     <div className={darkMode ? "app dark" : "app"}>

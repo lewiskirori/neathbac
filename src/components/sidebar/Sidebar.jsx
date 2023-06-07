@@ -9,8 +9,11 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
+    const {logout} = useContext(AuthContext)
 
   return (
     <>
@@ -18,7 +21,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
         <Link to="/dashboard" style={{ textDecoration: "none" }}>
             <div className="top">
                 <span className="logo">
-                    <img src="./img/nhb_logo.png" alt="nhb_logo" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-test-d0795.appspot.com/o/nhb_logo.png?alt=media&token=dfad5ce2-8606-43b7-9565-ff9739e6b3c1&_gl=1*137kicg*_ga*MjEyMDk4MTEyLjE2NzY5ODYyODI.*_ga_CW55HF8NVT*MTY4NjE1NzYyNC44MS4xLjE2ODYxNTc2OTYuMC4wLjA." alt="nhb_logo" />
                     </span>
             </div>
         </Link>
@@ -81,7 +84,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                         <span>My Account</span>
                     </li>
                 </Link>
-                <Link to="/login" style={{ textDecoration: "none" }}>
+                <Link to="/login" style={{ textDecoration: "none" }} onClick={logout}>
                     <li>
                         <Tooltip title="Sign Out">
                         <LogoutIcon className="icon" /></Tooltip>

@@ -81,6 +81,9 @@ export const ProductProvider = ({ children }) => {
           name: array[1],
           price: array[2],
           description: array[3],
+          images: [
+            "https://firebasestorage.googleapis.com/v0/b/ecommerce-test-d0795.appspot.com/o/images%2Fybxaw_nhb_logo.jpg?alt=media&token=9d13c7b7-9e1d-4603-944f-a1842ef42b8c&_gl=1*1mdu1fh*_ga*MjEyMDk4MTEyLjE2NzY5ODYyODI.*_ga_CW55HF8NVT*MTY4NTk4NjAwMy43Ny4xLjE2ODU5ODkyMzMuMC4wLjA.",
+          ],
           quantity: array[4],
           category: array[5],
           active: array[6],

@@ -50,10 +50,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (currentUser.uid != "") {
-      getUserDetails(currentUser.uid);
-      console.log(userDetails);
-    }
+    setTimeout(() => {
+      // console.log(auth.currentUser.uid);
+      // if (currentUser.uid != "") {
+        getUserDetails(auth.currentUser.uid);
+        // console.log(userDetails);
+      // }
+    }, 800);
   }, []);
 
   const dbUser = async (
@@ -185,11 +188,12 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     try {
-      // console.log("logged out");
+      console.log("logged out");
       auth.signOut();
-      // clearOnLogout();
+      clearOnLogout();
       return true;
     } catch (error) {
+      console.log(error.message);
       return false;
     }
     // return <Navigate replace to="/shop" />;

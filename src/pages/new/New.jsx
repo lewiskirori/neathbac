@@ -15,7 +15,7 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
   const [productId, setProductId] = useState("");
   const [getUrls, setGetUrls] = useState([]);
 
-  const [description,setDescription] = useState("")
+  const [description, setDescription] = useState("");
 
   // console.log(inputs);
 
@@ -31,10 +31,17 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
     setIsSubmit(true);
     let myArray = [];
     for (let index = 0; index < event.target.length - 1; index++) {
-      myArray.push(event.target[index].value);
+      if (
+        event.target[index].nodeName != "BUTTON" &&
+        event.target[index].className != "ql-header" &&
+        event.target[index].dataset.formula != "e=mc^2"
+      ) {
+        // console.log(event.target[index].dataset.formula);
+        myArray.push(event.target[index].value);
+      }
     }
     action(myArray);
-    console.log(myArray);
+    // console.log(myArray);
     // console.log(event.target[0].value);
   };
 
@@ -126,14 +133,25 @@ const New = ({ inputs, title, action, imageType = "none" }) => {
                   ) : (
                     <div className="formInput" key={input.id}>
                       <label>{input.label}</label>
-                      <ReactQuill theme="snow" value={description} onChange={setDescription} />
-                      <textarea hidden name="" id="" cols="30" rows="10" value={ description}></textarea>
+                      <ReactQuill
+                        theme="snow"
+                        value={description}
+                        onChange={setDescription}
+                      />
+                      <textarea
+                        hidden
+                        name=""
+                        id=""
+                        cols="30"
+                        rows="10"
+                        value={description}
+                      ></textarea>
                     </div>
                   )
                 )}
               </div>
               <br />
-              <button type="submit">Add...</button>
+              <button type="submit" className="button">Add...</button>
             </form>
           </div>
         </div>

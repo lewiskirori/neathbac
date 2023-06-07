@@ -99,13 +99,13 @@ export const productInputs = [
         options: ["true","false"],
         entryType: "select"
     },
-    {
-        id: 8,
-        label: "active",
-        type: "select",
-        options: ["true","false"],
-        entryType: "select"
-    },
+    // {
+    //     id: 8,
+    //     label: "active",
+    //     type: "select",
+    //     options: ["true","false"],
+    //     entryType: "select"
+    // },
 ]
 
 export const orderInputs = [

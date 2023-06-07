@@ -5,9 +5,15 @@ import Navbar from "../../components/navbar/Navbar"
 import Featured from "../../components/featured/Featured"
 import Chart from "../../components/chart/Chart"
 import Table from "../../components/table/Table"
+import { AuthContext } from "../../context/AuthContext"
+import { useContext } from "react"
 
 
 const Dashboard = () => {
+  const { currentUser } = useContext(AuthContext);
+  if (!currentUser) {
+    return <Navigate to="/" />;
+  } else {
   return (
     <div className="dashboard">
         <Sidebar />
@@ -30,6 +36,7 @@ const Dashboard = () => {
         </div>
     </div>
   )
+  }
 }
 
 export default Dashboard

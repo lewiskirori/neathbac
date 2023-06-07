@@ -45,7 +45,7 @@ const LogIn = () => {
     }
   };
   if (currentUser) {
-    return <Navigate replace to="/dashboard" />;
+    return <Navigate to="/dashboard" />;
   } else {
     return (
       <div className="signin">
