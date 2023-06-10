@@ -1,11 +1,34 @@
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./settings.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Tooltip from '@mui/material/Tooltip';
+import { AuthContext } from "../../context/AuthContext";
 
 const Settings = ({ inputs, title }) => {
+  const {userDetails} = useContext(AuthContext)
   const [file, setFile] = useState('');
+  console.log(userDetails)
+  const data =[userDetails.firstname,userDetails.lastname,userDetails.email,userDetails.phone]
+
+  const submit=(event)=>{
+    event.preventDefault();
+
+    let myArray = [];
+    for (let index = 0; index < event.target.length - 1; index++) {
+      if (
+        event.target[index].nodeName != "BUTTON" &&
+        event.target[index].className != "ql-header" &&
+        event.target[index].dataset.formula != "e=mc^2"
+      ) {
+        // console.log(event.target[index].dataset.formula);
+        myArray.push(event.target[index].value);
+      }
+    }
+    console.log(myArray)
+    // action(myArray);
+
+  }
 
   return (
     <div className="settings">
@@ -21,7 +44,7 @@ const Settings = ({ inputs, title }) => {
             <img
               src={
                 file ? URL.createObjectURL(file)
-                  : "https://images.pexels.com/photos/10394207/pexels-photo-10394207.jpeg?cs=srgb&dl=pexels-mostafaft-shots-10394207.jpg&fm=jpg&_gl=1*xeb6ut*_ga*MzkxMzI1ODAwLjE2ODMyMjIxOTM.*_ga_8JE65Q40S6*MTY4MzIyMjE5OS4xLjEuMTY4MzIyNDMzOS4wLjAuMA.."
+                  : userDetails.img
               }  
               alt=""
               onClick={() => document.getElementById("file").click()}
@@ -36,16 +59,21 @@ const Settings = ({ inputs, title }) => {
             />
           </div>
           <div className="right">
-            <form>
+            <form method="post" onSubmit={submit}>
                 {
-                  inputs.map(( input ) => (
+                  inputs.map(( input,index ) => (
+                    input.label == "Email"?
                     <div className="formInput" key={ input.id }>
                       <label>{ input.label }</label>
-                      <input type={ input.type } placeholder={ input.placeholder } />
-                    </div>
+                      <input type={ input.type } placeholder={ input.placeholder } disabled defaultValue={data[index]}/>
+                    </div>:
+                    <div className="formInput" key={ input.id }>
+                    <label>{ input.label }</label>
+                    <input type={ input.type } placeholder={ input.placeholder } defaultValue={data[index]}/>
+                  </div>
                   ))
                 }
-              <button>Update Account</button>
+              <button type="submit" >Update Account</button>
             </form>
           </div>
         </div>

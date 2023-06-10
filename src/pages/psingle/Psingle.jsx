@@ -66,13 +66,13 @@ const Psingle = (props) => {
             </div>
           </div>
           <div className="right">
-            <Chart title="Product spending (Last 12 Months)" aspect={3 / 1} />
+            <Chart title="Product sales (Last 12 Months)" aspect={3 / 1} />
           </div>
         </div>
-        <div className="bottom">
+        {/* <div className="bottom">
           <h1 className="title">Latest transactions</h1>
           <List />
-        </div>
+        </div> */}
       </div>
     </div>
   );

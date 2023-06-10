@@ -1,16 +1,16 @@
 export const userInputs = [
     {
         id: 1,
-        label: "Name",
+        label: "First Name",
         type: "text",
-        placeholder: "Username",
+        placeholder: "first Name",
         entryType: "input"
     },
     {
         id: 2,
-        label: "Full Name",
+        label: "Last Name",
         type: "text",
-        placeholder: "Full Name",
+        placeholder: "Last Name",
         entryType: "input"
     },
     {
@@ -27,19 +27,19 @@ export const userInputs = [
         placeholder: "+254 721 345 XXX",
         entryType: "input"
     },
-    {
-        id: 5,
-        label: "Password",
-        type: "password",
-        entryType: "input"
-    },
-    {
-        id: 6,
-        label: "Address",
-        type: "text",
-        placeholder: "Sri Auribindo St. 506, Nairobi",
-        entryType: "input"
-    },
+    // {
+    //     id: 5,
+    //     label: "Password",
+    //     type: "password",
+    //     entryType: "input"
+    // },
+    // {
+    //     id: 6,
+    //     label: "Address",
+    //     type: "text",
+    //     placeholder: "Sri Auribindo St. 506, Nairobi",
+    //     entryType: "input"
+    // },
     {
         id: 7,
         label: "Country",
@@ -161,20 +161,7 @@ export const orderInputs = [
 ]
 
 export const settingsInputs = [
-    {
-        id: 1,
-        label: "Name",
-        type: "text",
-        placeholder: "Neathbadmin",
-        entryType: "input"
-    },
-    {
-        id: 2,
-        label: "Email",
-        type: "mail",
-        placeholder: "neathbadmin@domain.com",
-        entryType: "input"
-    },
+
     {
         id: 3,
         label: "First name",
@@ -190,31 +177,38 @@ export const settingsInputs = [
         entryType: "input"
     },
     {
+        id: 2,
+        label: "Email",
+        type: "mail",
+        placeholder: "neathbadmin@domain.com",
+        entryType: "input"
+    },
+    {
         id: 5,
         label: "Phone",
         type: "text",
         placeholder: "+254 700 121 345",
         entryType: "input"
     },
-    {
-        id: 6,
-        label: "Address",
-        type: "text",
-        placeholder: "Undisclosed location",
-        entryType: "input"
-    },
-    {
-        id: 7,
-        label: "Password",
-        type: "password",
-        entryType: "input"
-    },
-    {
-        id: 8,
-        label: "Confirm Password",
-        type: "password",
-        entryType: "input"
-    },
+    // {
+    //     id: 6,
+    //     label: "Address",
+    //     type: "text",
+    //     placeholder: "Undisclosed location",
+    //     entryType: "input"
+    // },
+    // {
+    //     id: 7,
+    //     label: "Password",
+    //     type: "password",
+    //     entryType: "input"
+    // },
+    // {
+    //     id: 8,
+    //     label: "Confirm Password",
+    //     type: "password",
+    //     entryType: "input"
+    // },
 ]
 
 export const accountInputs = [

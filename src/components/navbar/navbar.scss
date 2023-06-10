@@ -1,3 +1,32 @@
+@keyframes pulsing {
+    0%{
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 150px;
+        animation: pulsing 1.7s linear infinite;
+      }
+}
 .navbar {
     height: 50px;
     border-bottom: 0.5px solid none;

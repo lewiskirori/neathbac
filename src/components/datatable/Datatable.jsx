@@ -19,9 +19,10 @@ const Datatable = () => {
             headerName: "Action",
             width: 150,
             renderCell: (params) => {
+                // console.log(params)
                 return (
                     <div className='cellAction'>
-                        <Link to="/users/test101" style={{ textDecoration: "none" }}>
+                        <Link to={"/users/"+ params.row.email} state={params.row} style={{ textDecoration: "none" }}>
                             <div className='viewButton'>View</div>
                         </Link>
                         <div className='deleteButton' onClick={() => handleDelete(params.row.id)}>Delete</div>
@@ -34,9 +35,9 @@ const Datatable = () => {
     <div className='datatable' >
         <div className="datatableTitle">
             Users
-            <Link to="/users/new" style={{ textDecoration: "none" }} className='link'>
+            {/* <Link to="/users/new" style={{ textDecoration: "none" }} className='link'>
                 Add New
-            </Link>
+            </Link> */}
         </div>
         <DataGrid
             className='datagrid'

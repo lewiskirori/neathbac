@@ -8,6 +8,7 @@ import CropEasy from "../crop/utils/cropeasy";
 import { ProductContext } from "../../context/ProductContext";
 
 const ImagePicker = ({
+  isProduct = true,
   isMulti = false,
   isSubmit = false,
   label,
@@ -23,6 +24,7 @@ const ImagePicker = ({
   const [tempFile, setTempFile] = useState(null);
   const [file, setFile] = useState(null);
   const { addProductImages } = useContext(ProductContext);
+  // const {}
   // const [urls, setUrls] = useState([]);
   // const [label, setLabel] = useState("");
 

@@ -25,12 +25,15 @@ import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { AuthContext } from "../../context/AuthContext";
+import { Navigate } from "react-router-dom";
+import { Visibility } from "@mui/icons-material";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [notificationCount, setNotificationCount] = useState("0");
-  const { logout } = useContext(AuthContext);
+  const { currentUser,userDetails,logout } = useContext(AuthContext);
+  const [showLoader,setShowLoader] = useState(true);
 
   const { dispatch } = useContext(DarkModeContext);
 
@@ -82,6 +85,9 @@ const Navbar = () => {
     if (storedSearchValue) {
       setSearchValue(storedSearchValue);
     }
+    setTimeout(()=>{
+      setShowLoader(false)
+    },1000)
   }, []);
 
   useEffect(() => {
@@ -124,10 +130,16 @@ const Navbar = () => {
   //   setNotificationCount(0);
   // });
 
-  console.log(notificationCount);
+  // console.log(notificationCount);
 
+  if (!currentUser) {
+    return <Navigate to="/" />;
+  }else{
   return (
     <div className="navbar">
+      <div className="loader" style={{visibility: showLoader? "visible":"hidden" }}>
+      <img src="img/nhb_logo.png" alt="nhb_logo" />
+      </div>
       {showSidebar && (
         <Sidebar
           showSidebar={showSidebar}
@@ -162,13 +174,13 @@ const Navbar = () => {
           </Tooltip>
         </div>
         <div className="items">
-          <div className="item">
+          {/* <div className="item">
             <Tooltip title="Color Mode">
               <IconButton onClick={() => dispatch({ type: "TOGGLE" })}>
                 <DarkModeRoundedIcon className="navicon" />
               </IconButton>
             </Tooltip>
-          </div>
+          </div> */}
           <PopupState variant="popper" popupId="demo-popup-popper">
             {(popupState) => (
               <div className="item">
@@ -216,7 +228,7 @@ const Navbar = () => {
                     aria-expanded={open ? "true" : undefined}
                   >
                     <img
-                      src="https://images.pexels.com/photos/10394207/pexels-photo-10394207.jpeg?cs=srgb&dl=pexels-mostafaft-shots-10394207.jpg&fm=jpg&_gl=1*xeb6ut*_ga*MzkxMzI1ODAwLjE2ODMyMjIxOTM.*_ga_8JE65Q40S6*MTY4MzIyMjE5OS4xLjEuMTY4MzIyNDMzOS4wLjAuMA.."
+                      src={userDetails.img}
                       alt=""
                       className="avatar"
                     />
@@ -325,5 +337,6 @@ const Navbar = () => {
     </div>
   );
 };
+}
 
 export default Navbar;

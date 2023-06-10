@@ -29,11 +29,13 @@ import { Account } from "./pages/account/Account";
 import Settings from "./pages/account/Settings";
 import { AuthContext } from "./context/AuthContext";
 import { ProductContext } from "./context/ProductContext";
+import { useUsers } from "./context/UserContext";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { register } = useContext(AuthContext);
   const { createProduct } = useContext(ProductContext);
+  const { createUser} = useUsers();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -57,11 +59,19 @@ function App() {
     },
     {
       path: "users/new",
-      element: <New inputs={userInputs} title="Add a New User" />,
+      element: <New inputs={userInputs} title="Add a New User" action={createUser}/>,
     },
     {
       path: "/account",
       element: <Account />,
+    },
+    {
+      path: "/blogs",
+      element: <Blogs />,
+    },
+    {
+      path: "/account/settings",
+      element: <Settings inputs={settingsInputs} title="Account Settings" />,
     },
     {
       path: "/account/new",

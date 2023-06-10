@@ -35,8 +35,10 @@ export const UserProvider = ({ children }) => {
               {
                 id: doc.id,
                 username: docData.firstname + " " + docData.lastname,
+                img:doc.img,
                 email: docData.email,
                 dob: docData.dob,
+                phone:docData.phone,
                 status: docData.status,
                 // ...doc.data(),
               },
@@ -49,13 +51,15 @@ export const UserProvider = ({ children }) => {
                 id: doc.id,
                 username: docData.firstname + " " + docData.lastname,
                 age: docData.dob,
+                img:docData.img,
                 email: docData.email,
+                phone:docData.phone,
                 status: docData.status,
             //   ...doc.data(),
             },
           ];
         }
-        console.log(currentList);
+        // console.log(currentList);
         return currentList;
       })
     );

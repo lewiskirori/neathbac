@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
         getUserDetails(auth.currentUser.uid);
         // console.log(userDetails);
       // }
-    }, 800);
+    }, 2000);
   }, []);
 
   const dbUser = async (
@@ -66,13 +66,15 @@ export const AuthProvider = ({ children }) => {
     lastname = "",
     role = "",
     gender = "",
-    phone = ""
+    phone = "",
+    img = "https://firebasestorage.googleapis.com/v0/b/ecommerce-test-d0795.appspot.com/o/blank-profile-picture.png?alt=media&token=574d2415-7ccc-41f0-894c-17336b28650f&_gl=1*13ptxbn*_ga*MTE2NTM2MjQ5MS4xNjg1MTYzNDUx*_ga_CW55HF8NVT*MTY4NjM3MjkwOC4yLjEuMTY4NjM3MzM5OC4wLjAuMA.."
   ) => {
     try {
       const docRef = doc(db, "staff", uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
+
         // console.log("Document data:", docSnap.data());
       } else {
         // docSnap.data() will be undefined in this case
@@ -83,6 +85,7 @@ export const AuthProvider = ({ children }) => {
           role: role,
           gender: gender,
           phone: phone,
+          img: img,
           created: new Date(),
         });
         // console.log("No such document!");
