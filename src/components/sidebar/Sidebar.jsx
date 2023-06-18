@@ -91,9 +91,9 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
         <div className="powered-by">
         <span className="powered-by-text">Powered by</span>
         <span className="powered-by-logo">Traffs</span>
-        <span className="powered-by-text">
+        </div>
+        <div className="powered-copyright">
           &copy; {new Date().getFullYear()} NHBAdmin
-        </span>
         </div>
     </div>
     {showSidebar && <div className="overlay" onClick={toggleSidebar} />}
