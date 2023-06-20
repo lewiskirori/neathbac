@@ -157,7 +157,7 @@ const Navbar = () => {
                 <div className="item">
                   <React.Fragment>
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center'   }}>
-                      <Tooltip title="Neathbadmin">
+                      <Tooltip title="NHBAdmin">
                         <IconButton
                           onClick={handleClick}
                           size="small"
