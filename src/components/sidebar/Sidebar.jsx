@@ -93,7 +93,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
         <span className="powered-by-logo">Traffs</span>
         </div>
         <div className="powered-copyright">
-          &copy; {new Date().getFullYear()} NHBAdmin
+          &copy; {new Date().getFullYear()}
         </div>
     </div>
     {showSidebar && <div className="overlay" onClick={toggleSidebar} />}
