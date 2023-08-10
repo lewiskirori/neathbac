@@ -92,7 +92,7 @@ const Login = () => {
           </button>
         </form>
         <p className="copy-text">
-          &copy; {new Date().getFullYear()} NHBAdmin. All rights reserved.
+          &copy; {new Date().getFullYear()} NHBAdmin.
         </p>
       </div>
       <Snackbar
