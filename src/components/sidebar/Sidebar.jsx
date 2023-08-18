@@ -27,7 +27,9 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                 right: -40, 
                 border: "1px solid #fff",
                 color: "#f5f5f5", 
-                cursor: "pointer" }}
+                cursor: "pointer",
+                transition: "all 0.3s ease-in-out",
+                }}
                 onClick={toggleSidebar}
             />
         )}
@@ -96,7 +98,9 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
           &copy; {new Date().getFullYear()}
         </div>
     </div>
-    {showSidebar && <div className="overlay" onClick={toggleSidebar} />}
+    {showSidebar && (
+      <div className={`overlay ${showSidebar ? "visible" : ""}`} onClick={toggleSidebar} />
+    )}
     </>
   )
 }
