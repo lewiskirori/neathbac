@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .sidebar {
     position: fixed;
     flex: 1;
@@ -8,12 +17,12 @@
     border-right: 0.5px solid rgb(230, 227, 227);
     min-height: 100vh;
     background-color: #fff;
-   
     transition: all 0.3s ease-in-out;
     z-index: 1000;
 
     &.open {
         transform: translateX(0%);
+        animation: fadeIn 0.3s ease-in-out;
     }
 
     &.closed {
@@ -31,6 +40,7 @@
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
         border-radius: 10px;
         cursor: pointer;
+        transition: all 0.3s ease-in-out;
 
         .logo {
             font-size: 20px;
@@ -46,6 +56,7 @@
 
     .center {
         padding-left: 10px;
+        transition: all 0.3s ease-in-out;
 
         ul {
             list-style: none;
@@ -136,6 +147,12 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    &.visible {
+        opacity: 1;
+    }
 }
 
 
