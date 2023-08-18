@@ -13,7 +13,7 @@ const BlogPost = ({ post }) => {
           </div>
         </div>
         <img src={image} alt={title} />
-        <div>{content}</div>
+        <p>{content}</p>
       </div>
     );
 };
