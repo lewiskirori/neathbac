@@ -38,7 +38,7 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="login-container">
-        <h1>Welcome back.</h1>
+        <h1>Welcome back</h1>
         <form method="" onSubmit={handleLogin}>
           <label htmlFor="username">Username</label>
           <input
@@ -92,7 +92,7 @@ const Login = () => {
           </button>
         </form>
         <p className="copy-text">
-          &copy; {new Date().getFullYear()} NHBAdmin
+          &copy; {new Date().getFullYear()} NHBAdmin.
         </p>
       </div>
       <Snackbar
